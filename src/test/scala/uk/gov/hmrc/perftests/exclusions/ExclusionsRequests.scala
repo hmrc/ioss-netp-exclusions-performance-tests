@@ -50,7 +50,7 @@ object ExclusionsRequests extends ServicesConfiguration {
       .formParam("affinityGroup", "Organisation")
       .formParam("email", "user@test.com")
       .formParam("credentialRole", "User")
-      .formParam("redirectionUrl", baseUrl + route)
+      .formParam("redirectionUrl", s"$baseUrl/$route/start-journey/IM9001234567")
       .formParam("enrolment[0].name", "HMRC-MTD-VAT")
       .formParam("enrolment[0].taxIdentifier[0].name", "VRN")
       .formParam("enrolment[0].taxIdentifier[0].value", "100000001")
