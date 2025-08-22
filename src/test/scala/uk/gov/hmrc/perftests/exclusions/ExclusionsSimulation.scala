@@ -21,7 +21,31 @@ import uk.gov.hmrc.perftests.exclusions.ExclusionsRequests._
 
 class ExclusionsSimulation extends PerformanceTestRunner {
 
-  setup("exclusions", "IOSS NETP Exclusions Journey") withRequests navigateToHomePage
+  setup("noEligibleSales", "No eligible sales - IOSS NETP Exclusions Journey") withRequests (
+    getAuthorityWizard,
+    postAuthorityWizard,
+    getExclusionsStoppedSellingGoods,
+    postExclusionsStoppedSellingGoods(true),
+    getExclusionsStoppedSellingGoodsDate,
+    postExclusionsStoppedSellingGoodsDate,
+    getCheckYourAnswers,
+    postCheckYourAnswers,
+    getClientExclusionsRequestReceived
+  )
+
+  setup("voluntary", "Voluntary - IOSS NETP Exclusions Journey") withRequests (
+    getAuthorityWizard,
+    postAuthorityWizard,
+    getExclusionsStoppedSellingGoods,
+    postExclusionsStoppedSellingGoods(false),
+    getExclusionsLeaveScheme,
+    postExclusionsLeaveScheme,
+    getExclusionsStoppedUsingServiceDate,
+    postExclusionsStoppedUsingServiceDate,
+    getCheckYourAnswers,
+    postCheckYourAnswers,
+    getClientExclusionsRequestReceived
+  )
 
   runSimulation()
 }
