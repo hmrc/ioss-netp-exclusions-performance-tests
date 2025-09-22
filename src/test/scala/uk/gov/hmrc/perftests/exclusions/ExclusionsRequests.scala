@@ -19,7 +19,6 @@ package uk.gov.hmrc.perftests.exclusions
 import io.gatling.core.Predef._
 import io.gatling.core.session.Expression
 import io.gatling.http.Predef._
-import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
 import java.time.LocalDate
@@ -111,9 +110,7 @@ object ExclusionsRequests extends ServicesConfiguration {
 
   def postCheckYourAnswers =
     http("Post Check Your Answers")
-      .post(s"$baseUrl$route/check-your-answers")
-//      no completion checks yet
-//      .post(s"$baseUrl$route/check-your-answers/false")
+      .post(s"$baseUrl$route/check-your-answers/false")
       .formParam("csrfToken", "#{csrfToken}")
       .check(status.in(200, 303))
       .check(header("Location").is(s"$route/client-exclusions-request-received"))
