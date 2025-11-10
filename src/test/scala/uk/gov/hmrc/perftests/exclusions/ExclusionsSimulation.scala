@@ -24,6 +24,7 @@ class ExclusionsSimulation extends PerformanceTestRunner {
   setup("noEligibleSales", "No eligible sales - IOSS NETP Exclusions Journey") withRequests (
     getAuthorityWizard,
     postAuthorityWizard,
+    getExclusionsJourney,
     getExclusionsStoppedSellingGoods,
     postExclusionsStoppedSellingGoods(true),
     getExclusionsStoppedSellingGoodsDate,
@@ -36,6 +37,7 @@ class ExclusionsSimulation extends PerformanceTestRunner {
   setup("voluntary", "Voluntary - IOSS NETP Exclusions Journey") withRequests (
     getAuthorityWizard,
     postAuthorityWizard,
+    getExclusionsJourney,
     getExclusionsStoppedSellingGoods,
     postExclusionsStoppedSellingGoods(false),
     getExclusionsLeaveScheme,
