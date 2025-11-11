@@ -49,7 +49,7 @@ object ExclusionsRequests extends ServicesConfiguration {
       .formParam("affinityGroup", "Organisation")
       .formParam("email", "user@test.com")
       .formParam("credentialRole", "User")
-      .formParam("redirectionUrl", s"$baseUrl/$route/start-journey/IM9001234567")
+      .formParam("redirectionUrl", s"$baseUrl/$route/start-journey/IM9001144771")
       .formParam("enrolment[0].name", "HMRC-MTD-VAT")
       .formParam("enrolment[0].taxIdentifier[0].name", "VRN")
       .formParam("enrolment[0].taxIdentifier[0].value", "100000001")
@@ -60,6 +60,12 @@ object ExclusionsRequests extends ServicesConfiguration {
       .formParam("enrolment[1].state", "Activated")
       .check(status.in(200, 303))
       .check(headerRegex("Set-Cookie", """mdtp=(.*)""").saveAs("mdtpCookie"))
+
+  def getExclusionsJourney =
+    http("Get Exclusions Journey")
+      .get(s"$baseUrl$route/start-journey/IM9001144771")
+      .check(status.in(303))
+      .check(header("Location").is(s"$route/exclusions-stopped-selling-goods"))
 
   def getExclusionsStoppedSellingGoods =
     http("Get Exclusions Stopped Selling Goods page")
