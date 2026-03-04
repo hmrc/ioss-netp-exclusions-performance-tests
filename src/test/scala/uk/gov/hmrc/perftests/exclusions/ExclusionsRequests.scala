@@ -74,15 +74,15 @@ object ExclusionsRequests extends ServicesConfiguration {
       .check(css(inputSelectorByName("csrfToken"), "value").saveAs("csrfToken"))
       .check(status.in(200))
 
-  def testExclusionsStoppedSellingGoods(answer: Boolean) =
+  def testExclusionsStoppedSellingGoods(answer: String) =
     http("Post Exclusions Stopped Selling Goods page")
       .post(s"$baseUrl$route/exclusions-stopped-selling-goods")
       .formParam("csrfToken", "#{csrfToken}")
       .formParam("value", answer)
       .check(status.in(200, 303))
 
-  def postExclusionsStoppedSellingGoods(answer: Boolean) =
-    if (answer) {
+  def postExclusionsStoppedSellingGoods(answer: String) =
+    if (answer == "Yes") {
       testExclusionsStoppedSellingGoods(answer)
         .check(header("Location").is(s"$route/exclusions-stopped-selling-goods-date"))
     } else {
